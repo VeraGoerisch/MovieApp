@@ -88,6 +88,9 @@ export default {
       `,
       },
     }).then(response => {
+      if (response.data.errors) {
+        throw Error('API error');
+      }
       return response.data.data.movies.movie;
     });
 
