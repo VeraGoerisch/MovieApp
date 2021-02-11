@@ -1,9 +1,9 @@
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import MovieCard from '@/components/MovieCard.vue';
 
 describe('MovieCard', () => {
   test('this is a vue instance', () => {
-    const wrapper = mount(MovieCard, {
+    const wrapper = shallowMount(MovieCard, {
       propsData: {
         imageSrc: 'testImage.jpg',
         title: 'Test Title',
@@ -13,7 +13,7 @@ describe('MovieCard', () => {
   });
 
   test('renders properly', () => {
-    const wrapper = mount(MovieCard, {
+    const wrapper = shallowMount(MovieCard, {
       propsData: {
         imageSrc: 'testImage.jpg',
         title: 'Test Title',

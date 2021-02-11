@@ -13,4 +13,4 @@ Use NuxtJS to build a simple two page movie info application.
 
 Data endpoint can be found [here](https://tmdb.apps.quintero.io).
 
-View this application live [here](https://movie-app-vera.herokuapp.com).
+Live demo [here](https://movie-app-vera.herokuapp.com).

@@ -3,10 +3,17 @@
     <SearchAgainBtn />
     <h2>{{ movie.title }}</h2>
     <div class="data-container">
-      <img class="column" :src="movie.poster" alt="Movie Poster" />
+      <img
+        v-show="movie.poster"
+        class="column"
+        :src="movie.poster"
+        alt="Movie Poster"
+      />
       <div class="column">
-        <p><span class="highlight">Rating:</span> {{ movie.rating }}</p>
-        <p>
+        <p v-show="movie.rating">
+          <span class="highlight">Rating:</span> {{ movie.rating }}
+        </p>
+        <p v-show="movie.details.genres.length">
           <span class="highlight"> Genre:</span>
           <span v-for="(genre, index) in movie.details.genres" :key="index"
             >{{ genre.name
@@ -15,12 +22,14 @@
             </span></span
           >
         </p>
-        <p>
+        <p v-show="movie.releaseDate">
           <span class="highlight">Release Date:</span>
           {{ movie.releaseDate | dateFormatter }}
         </p>
-        <p><span class="highlight">Overview:</span> {{ movie.overview }}</p>
-        <p class="highlight">Credits:</p>
+        <p v-show="movie.overview">
+          <span class="highlight">Overview:</span> {{ movie.overview }}
+        </p>
+        <p v-show="movie.credits.cast.length" class="highlight">Credits:</p>
         <ul
           class="credit-list"
           v-for="(castMember, index) in movie.credits.cast"
@@ -78,11 +87,9 @@ export default {
           }
       `,
       },
-    })
-      .then(response => {
-        return response.data.data.movies.movie;
-      })
-      .catch(err => console.log(err));
+    }).then(response => {
+      return response.data.data.movies.movie;
+    });
 
     return { movie };
   },

@@ -12,7 +12,7 @@
       />
       <p v-if="$fetchState.pending">Searching...</p>
       <p v-else-if="$fetchState.error">
-        Something went wrong. Please try again later.
+        Something went wrong. Please try searching for a different movie.
       </p>
       <ul v-else>
         <li v-for="movie in movies" :key="movie.id">
@@ -51,7 +51,7 @@ export default {
     resetSearchQuery() {
       this.searchQuery = '';
       this.movies = [];
-      this.noResults = '';
+      this.noResults = false;
     },
   },
   async fetch() {
@@ -81,18 +81,17 @@ export default {
           }
       `,
       },
-    })
-      .then(response => {
-        let edges = response.data.data.movies.search.edges;
-        if (!edges.length) {
-          this.noResults = true;
-          return;
-        }
-        this.movies = edges.map(edge => edge.node);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    }).then(response => {
+      if (response.data.errors) {
+        throw Error('API error');
+      }
+      let edges = response.data.data.movies.search.edges;
+      if (!edges.length) {
+        this.noResults = true;
+        return;
+      }
+      this.movies = edges.map(edge => edge.node);
+    });
   },
 };
 </script>
