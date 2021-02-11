@@ -14,7 +14,7 @@
       <p v-else-if="$fetchState.error">
         Something went wrong. Please try searching for a different movie.
       </p>
-      <ul v-else>
+      <ul class="movie-list" v-else>
         <li v-for="movie in movies" :key="movie.id">
           <NuxtLink :to="{ name: 'single-movie', params: { id: movie.id } }">
             <MovieCard
@@ -108,12 +108,13 @@ export default {
 h1 {
   margin: 20px 0;
 }
-ul {
+ul.movie-list {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
   align-items: flex-start;
+  padding: 0;
 }
 li {
   display: inline-block;
